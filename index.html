@@ -24,12 +24,12 @@
     body {
       background-color: var(--bg-color);
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.5;
       padding-bottom: 80px;
     }
 
     .container {
-      max-width: 900px;
+      max-width: 1000px;
       margin: 0 auto;
       padding: 0 20px;
     }
@@ -39,10 +39,11 @@
       display: inline-block;
       background-color: var(--accent);
       color: #fff;
-      padding: 14px 28px;
+      padding: 12px 22px;
       border-radius: 50px;
       text-decoration: none;
       font-weight: 600;
+      font-size: 0.95rem;
       transition: all 0.2s ease;
       text-align: center;
       box-shadow: 0 4px 14px rgba(139, 92, 246, 0.4);
@@ -65,55 +66,55 @@
       border: 1px solid var(--accent);
       color: var(--text);
       box-shadow: none;
-      margin-top: 10px;
     }
 
     .btn-secondary:hover {
-      background-color: rgba(139, 92, 246, 0.1);
+      background-color: rgba(139, 92, 246, 0.15);
     }
 
     /* Секції */
     section {
-      padding: 60px 0;
+      padding: 50px 0;
       border-bottom: 1px solid #334155;
     }
 
     /* Hero */
     .hero {
       text-align: center;
-      padding: 80px 0 60px;
+      padding: 60px 0 40px;
     }
 
     .hero h1 {
-      font-size: 2.5rem;
-      margin-bottom: 15px;
+      font-size: 2.2rem;
+      margin-bottom: 12px;
       color: #f1f5f9;
     }
 
     .hero p {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       color: var(--text-muted);
-      max-width: 600px;
-      margin: 0 auto 30px;
+      max-width: 580px;
+      margin: 0 auto 25px;
     }
 
     /* Про мене */
     .about-content {
       background: var(--card-bg);
-      padding: 30px;
+      padding: 25px;
       border-radius: 16px;
-      margin-top: 20px;
+      margin-top: 15px;
     }
 
     .about-list {
       list-style: none;
-      margin: 20px 0;
+      margin: 15px 0;
     }
 
     .about-list li {
-      margin-bottom: 10px;
-      padding-left: 24px;
+      margin-bottom: 8px;
+      padding-left: 20px;
       position: relative;
+      font-size: 0.95rem;
     }
 
     .about-list li::before {
@@ -123,76 +124,104 @@
       color: var(--accent);
     }
 
-    /* Карточки послуг */
+    /* Компактні карточки послуг */
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-      margin-top: 30px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 25px;
     }
 
     .card {
       background: var(--card-bg);
-      border-radius: 16px;
-      padding: 25px;
+      border-radius: 14px;
+      padding: 20px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       border: 1px solid #334155;
       cursor: pointer;
-      transition: border-color 0.2s ease, transform 0.2s ease;
+      transition: all 0.2s ease;
+      position: relative;
     }
 
     .card:hover {
       border-color: var(--accent);
-      transform: translateY(-4px);
+      transform: translateY(-3px);
     }
 
     .card h3 {
-      font-size: 1.3rem;
-      margin-bottom: 10px;
+      font-size: 1.15rem;
+      margin-bottom: 8px;
     }
 
     .card p {
       color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-bottom: 20px;
+      font-size: 0.88rem;
+      margin-bottom: 15px;
+      line-height: 1.4;
       flex-grow: 1;
     }
 
     .price {
-      font-size: 1.25rem;
+      font-size: 1.15rem;
       font-weight: 700;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
       color: #38bdf8;
     }
 
     .price old {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: #64748b;
       text-decoration: line-through;
-      margin-left: 8px;
+      margin-left: 6px;
+    }
+
+    /* Картка Підписки */
+    .card-subscription {
+      border: 2px solid var(--accent) !important;
+      background: linear-gradient(145deg, #1e293b 0%, #2e1065 100%) !important;
+    }
+
+    .card-subscription:hover {
+      box-shadow: 0 0 18px rgba(139, 92, 246, 0.4);
+    }
+
+    .badge {
+      position: absolute;
+      top: -10px;
+      right: 12px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
 
     /* FAQ */
     .faq-item {
       background: var(--card-bg);
-      padding: 20px;
+      padding: 18px;
       border-radius: 12px;
-      margin-top: 15px;
+      margin-top: 12px;
     }
 
     .faq-item h4 {
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       color: #e2e8f0;
+      font-size: 1rem;
     }
 
     .faq-item p {
       color: var(--text-muted);
-      font-size: 0.95rem;
+      font-size: 0.9rem;
     }
 
-    /* Плаваюча кнопка для мобільних */
+    /* Плаваюча кнопка */
     .sticky-btn-wrapper {
       position: fixed;
       bottom: 20px;
@@ -200,7 +229,7 @@
       z-index: 999;
     }
 
-    /* МОДАЛЬНЕ ВІКНО */
+    /* МОДАЛЬНІ ВІКНА */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -223,24 +252,23 @@
     .modal-card {
       background: var(--card-bg);
       border: 1px solid #334155;
-      border-radius: 20px;
-      max-width: 500px;
+      border-radius: 18px;
+      max-width: 480px;
       width: 100%;
-      padding: 30px;
+      padding: 25px;
       position: relative;
       box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
     }
 
     .modal-close {
       position: absolute;
-      top: 15px;
-      right: 20px;
+      top: 12px;
+      right: 18px;
       background: none;
       border: none;
       color: var(--text-muted);
       font-size: 1.8rem;
       cursor: pointer;
-      line-height: 1;
     }
 
     .modal-close:hover {
@@ -248,34 +276,45 @@
     }
 
     .modal-title {
-      font-size: 1.5rem;
-      margin-bottom: 10px;
+      font-size: 1.35rem;
+      margin-bottom: 8px;
       color: #f1f5f9;
+      padding-right: 20px;
     }
 
     .modal-price {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       font-weight: 700;
       color: #38bdf8;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
     }
 
     .modal-body {
       color: var(--text-muted);
-      font-size: 1rem;
-      margin-bottom: 25px;
+      font-size: 0.92rem;
+      margin-bottom: 20px;
     }
 
     .modal-body ul {
-      margin-top: 10px;
-      margin-left: 20px;
+      margin-top: 8px;
+      margin-left: 18px;
     }
 
     .modal-body li {
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
 
-    @media (max-width: 600px) {
+    /* Адаптив під планшети та телефони */
+    @media (max-width: 850px) {
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 550px) {
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
       .sticky-btn-wrapper {
         left: 20px;
         right: 20px;
@@ -311,7 +350,7 @@
       </div>
     </section>
 
-    <!-- ПОСЛУГИ -->
+    <!-- ПОСЛУГИ (Рівно 6 компактних карток) -->
     <section>
       <h2>Обрати розклад</h2>
       <div class="services-grid">
@@ -320,7 +359,7 @@
         <div class="card" onclick="openModal('modal-1')">
           <div>
             <h3>Три карти</h3>
-            <p>Швидка відповідь на одне чітке питання або швидка оцінка ситуації в будь-якій сфері.</p>
+            <p>Швидка відповідь на одне чітке питання або точна оцінка ситуації.</p>
           </div>
           <div>
             <div class="price">199,99 грн <old>250 грн</old></div>
@@ -332,7 +371,7 @@
         <div class="card" onclick="openModal('modal-2')">
           <div>
             <h3>Сигніфікація</h3>
-            <p>Глибокий аналіз вашої особистості, внутрішнього стану або стосунків з партнером.</p>
+            <p>Глибокий аналіз вашої особистості, стану або стосунків з партнером.</p>
           </div>
           <div>
             <div class="price">299,99 грн <old>350 грн</old></div>
@@ -344,7 +383,7 @@
         <div class="card" onclick="openModal('modal-3')">
           <div>
             <h3>Огляд ситуації</h3>
-            <p>Повний розбір запиту: причини, приховані мотиви, підказки карт та ймовірний результат.</p>
+            <p>Повний розбір запиту: причини, приховані мотиви та ймовірний результат.</p>
           </div>
           <div>
             <div class="price">399,99 грн <old>450 грн</old></div>
@@ -356,11 +395,36 @@
         <div class="card" onclick="openModal('modal-4')">
           <div>
             <h3>Консультація (1 год)</h3>
-            <p>Індивідуальна робота в режимі реального часу. Будь-яка кількість питань протягом години.</p>
+            <p>Робота в режимі реального часу. Будь-яка кількість питань за годину.</p>
           </div>
           <div>
             <div class="price">499,99 грн <old>550 грн</old></div>
             <button class="btn btn-block btn-secondary">Детальніше</button>
+          </div>
+        </div>
+
+        <!-- Розклад 5: Індивідуальне питання -->
+        <div class="card" onclick="openModal('modal-5')">
+          <div>
+            <h3>Своє питання</h3>
+            <p>Не знайшли підходящий варіант? Сформулюємо унікальний розклад під вас.</p>
+          </div>
+          <div>
+            <div class="price">від 150 грн</div>
+            <button class="btn btn-block btn-secondary">Детальніше</button>
+          </div>
+        </div>
+
+        <!-- Розклад 6: ПІДПИСКА -->
+        <div class="card card-subscription" onclick="openModal('modal-sub')">
+          <div class="badge">🔥 TOP</div>
+          <div>
+            <h3>Таро-Супровід</h3>
+            <p>Ваш особистий провідник на 30 днів. Великий розклад + експрес-підтримка.</p>
+          </div>
+          <div>
+            <div class="price">899,99 грн/міс <old>1100 грн</old></div>
+            <button class="btn btn-block">Детальніше</button>
           </div>
         </div>
 
@@ -393,41 +457,35 @@
     <a href="https://t.me/TAROTBYV_bot" target="_blank" class="btn">💬 Записатися в Telegram</a>
   </div>
 
-  <!-- МОДАЛЬНІ ВІКНА ДЛЯ КОЖНОГО РОЗКЛАДУ -->
+  <!-- МОДАЛЬНІ ВІКНА -->
 
-  <!-- Вікно 1 -->
   <div class="modal-overlay" id="modal-1" onclick="closeModalOnOuter(event, 'modal-1')">
     <div class="modal-card">
       <button class="modal-close" onclick="closeModal('modal-1')">&times;</button>
       <div class="modal-title">Розклад «Три карти»</div>
-      <div class="modal-price">199,99 грн <old style="text-decoration: line-through; color: #64748b; font-size: 0.9rem;">250 грн</old></div>
+      <div class="modal-price">199,99 грн <old style="text-decoration: line-through; color: #64748b; font-size: 0.85rem;">250 грн</old></div>
       <div class="modal-body">
-        <p>Ідеальний вибір, якщо вам потрібна точна та швидка орієнтація в ситуації без надлишкової теорії.</p>
-        <br>
-        <p><strong>Що входить у розклад:</strong></p>
+        <p>Ідеальний вибір, якщо вам потрібна точна та швидка орієнтація в ситуації без зайвої теорії.</p>
         <ul>
-          <li>Аналіз минулого або причини ситуації.</li>
+          <li>Причина або витоки ситуації.</li>
           <li>Теперішній стан та приховані фактори.</li>
-          <li>Порада карт і найімовірніший розвиток подій.</li>
+          <li>Порада карт і найімовірніший розвиток.</li>
         </ul>
       </div>
       <a href="https://t.me/TAROTBYV_bot" target="_blank" class="btn btn-block">🔮 Записатися в Telegram</a>
     </div>
   </div>
 
-  <!-- Вікно 2 -->
   <div class="modal-overlay" id="modal-2" onclick="closeModalOnOuter(event, 'modal-2')">
     <div class="modal-card">
       <button class="modal-close" onclick="closeModal('modal-2')">&times;</button>
       <div class="modal-title">Розклад «Сигніфікація»</div>
-      <div class="modal-price">299,99 грн <old style="text-decoration: line-through; color: #64748b; font-size: 0.9rem;">350 грн</old></div>
+      <div class="modal-price">299,99 грн <old style="text-decoration: line-through; color: #64748b; font-size: 0.85rem;">350 грн</old></div>
       <div class="modal-body">
         <p>Глибокий розбір вашого особистого стану чи взаємодії з конкретною людиною.</p>
-        <br>
-        <p><strong>Що покаже розклад:</strong></p>
         <ul>
-          <li>Ваші справжні почуття, думки та підсвідомі мотиви.</li>
-          <li>Намір та ставлення іншої людини до вас (у разі аналізу стосунків).</li>
+          <li>Справжні почуття, думки та мотиви.</li>
+          <li>Наміри та ставлення іншої людини.</li>
           <li>Внутрішні блоки та точки росту.</li>
         </ul>
       </div>
@@ -435,47 +493,76 @@
     </div>
   </div>
 
-  <!-- Вікно 3 -->
   <div class="modal-overlay" id="modal-3" onclick="closeModalOnOuter(event, 'modal-3')">
     <div class="modal-card">
       <button class="modal-close" onclick="closeModal('modal-3')">&times;</button>
       <div class="modal-title">Розклад «Огляд ситуації»</div>
-      <div class="modal-price">399,99 грн <old style="text-decoration: line-through; color: #64748b; font-size: 0.9rem;">450 грн</old></div>
+      <div class="modal-price">399,99 грн <old style="text-decoration: line-through; color: #64748b; font-size: 0.85rem;">450 грн</old></div>
       <div class="modal-body">
-        <p>Масштабний аналіз будь-якої складної теми: робота, вибір із двох варіантів, криза у стосунках чи пошук власного шляху.</p>
-        <br>
-        <p><strong>Детальний склад:</strong></p>
+        <p>Масштабний аналіз будь-якої складної теми: робота, стосунки або вибір із декількох варіантів.</p>
         <ul>
           <li>Повна хронологія та витоки проблеми.</li>
           <li>Перспективи розвитку за кількома сценаріями.</li>
-          <li>Чіткі рекомендації карт, як діяти найкраще.</li>
+          <li>Чіткі рекомендації карт.</li>
         </ul>
       </div>
       <a href="https://t.me/TAROTBYV_bot" target="_blank" class="btn btn-block">🔮 Записатися в Telegram</a>
     </div>
   </div>
 
-  <!-- Вікно 4 -->
   <div class="modal-overlay" id="modal-4" onclick="closeModalOnOuter(event, 'modal-4')">
     <div class="modal-card">
       <button class="modal-close" onclick="closeModal('modal-4')">&times;</button>
-      <div class="modal-title">Індивідуальна консультація (1 година)</div>
-      <div class="modal-price">499,99 грн <old style="text-decoration: line-through; color: #64748b; font-size: 0.9rem;">550 грн</old></div>
+      <div class="modal-title">Консультація (1 година)</div>
+      <div class="modal-price">499,99 грн <old style="text-decoration: line-through; color: #64748b; font-size: 0.85rem;">550 грн</old></div>
       <div class="modal-body">
-        <p>Повна взаємодія у форматі живого діалогу (дзвінок або швидке листування в режимі реального часу).</p>
-        <br>
-        <p><strong>Особливості консультації:</strong></p>
+        <p>Повна взаємодія у форматі живого діалогу (дзвінок або швидкий чат в реальному часі).</p>
         <ul>
-          <li>Необмежена кількість запитань протягом 60 хвилин.</li>
-          <li>Можливість глибше розбирати кожне уточнений момент ходу розкладу.</li>
-          <li>Максимальна підтримка та опрацювання будь-яких тем.</li>
+          <li>Необмежена кількість питань протягом 60 хв.</li>
+          <li>Глибоке опрацювання деталей у ході розкладу.</li>
+          <li>Максимальна підтримка.</li>
         </ul>
       </div>
       <a href="https://t.me/TAROTBYV_bot" target="_blank" class="btn btn-block">🔮 Записатися в Telegram</a>
     </div>
   </div>
 
-  <!-- СКРИПТ ДЛЯ РОБОТИ МОДАЛЬНИХ ВІКОН -->
+  <div class="modal-overlay" id="modal-5" onclick="closeModalOnOuter(event, 'modal-5')">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal('modal-5')">&times;</button>
+      <div class="modal-title">Індивідуальне питання</div>
+      <div class="modal-price">від 150 грн</div>
+      <div class="modal-body">
+        <p>Якщо у вас специфічний або коротий запит, що не підпадає під стандартні шаблони.</p>
+        <ul>
+          <li>Напишіть у бот вашу ситуацію.</li>
+          <li>Ми разом сформулюємо точні питання.</li>
+          <li>Підберемо оптимальну вартість під ваш обсяг.</li>
+        </ul>
+      </div>
+      <a href="https://t.me/TAROTBYV_bot" target="_blank" class="btn btn-block">🔮 Написати в Telegram</a>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-sub" onclick="closeModalOnOuter(event, 'modal-sub')">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal('modal-sub')">&times;</button>
+      <div class="modal-title">🔮 Таро-Супровід (30 днів)</div>
+      <div class="modal-price">899,99 грн / місяць <old style="text-decoration: line-through; color: #64748b; font-size: 0.85rem;">1100 грн</old></div>
+      <div class="modal-body">
+        <p>Формат для тих, хто хоче мати постійну підказку карт поруч протягом місяця.</p>
+        <ul>
+          <li>✨ <strong>Великий розклад на місяць:</strong> фокус уваги, робота, стосунки.</li>
+          <li>🗓 <strong>Щотижневий орієнтир:</strong> підказки карт на кожен новий тиждень.</li>
+          <li>⚡ <strong>3 експрес-розклади (3 карти):</strong> можливість терміново розібрати питання без черги.</li>
+          <li>👑 <strong>Пріоритет у черзі:</strong> ваші запити опрацьовуються першочергово.</li>
+        </ul>
+      </div>
+      <a href="https://t.me/TAROTBYV_bot" target="_blank" class="btn btn-block">🔮 Оформити підписку в Telegram</a>
+    </div>
+  </div>
+
+  <!-- СКРИПТ -->
   <script>
     function openModal(id) {
       document.getElementById(id).classList.add('active');
