@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Таро-консультації | Персональний розклад</title>
+  <style>
+    :root {
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --accent: #8b5cf6;
+      --accent-hover: #7c3aed;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 80px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Кнопки */
+    .btn {
+      display: inline-block;
+      background-color: var(--accent);
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      text-align: center;
+      box-shadow: 0 4px 14px rgba(139, 92, 246, 0.4);
+    }
+
+    .btn:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn-block {
+      display: block;
+      width: 100%;
+    }
+
+    /* Секції */
+    section {
+      padding: 60px 0;
+      border-bottom: 1px solid #334155;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 80px 0 60px;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      color: #f1f5f9;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 30px;
+    }
+
+    /* Про мене */
+    .about-content {
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 16px;
+      margin-top: 20px;
+    }
+
+    .about-list {
+      list-style: none;
+      margin: 20px 0;
+    }
+
+    .about-list li {
+      margin-bottom: 10px;
+      padding-left: 24px;
+      position: relative;
+    }
+
+    .about-list li::before {
+      content: "✦";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    /* Карточки послуг */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid #334155;
+    }
+
+    .card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .price {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: #38bdf8;
+    }
+
+    .price old {
+      font-size: 0.9rem;
+      color: #64748b;
+      text-decoration: line-through;
+      margin-left: 8px;
+    }
+
+    /* FAQ */
+    .faq-item {
+      background: var(--card-bg);
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 15px;
+    }
+
+    .faq-item h4 {
+      margin-bottom: 8px;
+      color: #e2e8f0;
+    }
+
+    .faq-item p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Плаваюча кнопка для мобільних */
+    .sticky-btn-wrapper {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999;
+    }
+
+    @media (max-width: 600px) {
+      .sticky-btn-wrapper {
+        left: 20px;
+        right: 20px;
+      }
+      .sticky-btn-wrapper .btn {
+        width: 100%;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <h1>Персональні розклади Таро</h1>
+      <p>Просто, щиро та без зайвої «води». Допоможу розібратися в причині ситуації та знайти найкращий шлях рішення.</p>
+      <a href="https://t.me/TAROTBYV_bot" target="_blank" class="btn">🔮 Записатися в Telegram</a>
+    </section>
+
+    <!-- ПРО МЕНЕ -->
+    <section>
+      <h2>Про мене та мій підхід</h2>
+      <div class="about-content">
+        <p>В езотериці я з самого дитинства, а карти Таро є моїм основним інструментом вже понад 3 роки. Я сприймаю кожного клієнта як близьку людину, яка поділилася відвертим.</p>
+        <ul class="about-list">
+          <strong>Зручний формат на вибір:</strong> текст з фото карт, аудіоповідомлення або онлайн-дзвінок (дзвінки Пн–Пт з 8:00 до 18:00).
+          <li><strong>Відвертість:</strong> підбираю влучні та підтримуючі слова без лякань чи «магічних» штампів.</li>
+          <li><strong>Глибина:</strong> шукаємо першопричину та варіативність розвитку подій.</li>
+        </ul>
+        <a href="https://t.me/TAROTBYV_bot" target="_blank" class="btn btn-block">Записатися на розклад</a>
+      </div>
+    </section>
+
+    <!-- ПОСЛУГИ -->
+    <section>
+      <h2>Обрати розклад</h2>
+      <div class="services-grid">
+        
+        <div class="card">
+          <div>
+            <h3>Три карти</h3>
+            <p>Швидка відповідь на одне чітке питання або швидка оцінка ситуації в будь-якій сфері.</p>
+          </div>
+          <div>
+            <div class="price">199,99 грн <old>250 грн</old></div>
+            <a href="https://t.me/TAROTBYV_bot" target="_blank" class="btn btn-block">Записатися</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div>
+            <h3>Сигніфікація</h3>
+            <p>Глибокий аналіз вашої особистості, внутрішнього стану або стосунків з партнером.</p>
+          </div>
+          <div>
+            <div class="price">299,99 грн <old>350 грн</old></div>
+            <a href="https://t.me/TAROTBYV_bot" target="_blank" class="btn btn-block">Записатися</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div>
+            <h3>Огляд ситуації</h3>
+            <p>Повний розбір запиту: причини, приховані мотиви, підказки карт та ймовірний результат.</p>
+          </div>
+          <div>
+            <div class="price">399,99 грн <old>450 грн</old></div>
+            <a href="https://t.me/TAROTBYV_bot" target="_blank" class="btn btn-block">Записатися</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div>
+            <h3>Консультація (1 год)</h3>
+            <p>Індивідуальна робота в режимі реального часу. Будь-яка кількість питань протягом години.</p>
+          </div>
+          <div>
+            <div class="price">499,99 грн <old>550 грн</old></div>
+            <a href="https://t.me/TAROTBYV_bot" target="_blank" class="btn btn-block">Записатися</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section>
+      <h2>Часті запитання</h2>
+      
+      <div class="faq-item">
+        <h4>Як швидко я отримаю розклад?</h4>
+        <p>Зазвичай розклад виконується протягом 24 годин після підтвердження оплати.</p>
+      </div>
+
+      <div class="faq-item">
+        <h4>Чи це конфіденційно?</h4>
+        <p>Абсолютно. Усі ваші запитання та результати залишаються виключно між нами.</p>
+      </div>
+
+      <div class="faq-item">
+        <h4>Як відбуватиметься оплата?</h4>
+        <p>У боті ви отримаєте реквізити та QR-код для зручного переказу, після чого зможете надіслати чек.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- ПЛАВАЮЧА КНОПКА -->
+  <div class="sticky-btn-wrapper">
+    <a href="https://t.me/TAROTBYV_bot" target="_blank" class="btn">💬 Записатися в Telegram</a>
+  </div>
+
+</body>
+</html>
