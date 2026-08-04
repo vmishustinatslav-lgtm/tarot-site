@@ -15,13 +15,17 @@
     }
 
     /* Стилі для світлої теми */
-    [data-theme="light"] {
+  [data-theme="light"] {
       --bg-color: #f8fafc;
       --card-bg: #ffffff;
       --accent: #7c3aed;
       --accent-hover: #6d28d9;
       --text: #0f172a;
       --text-muted: #475569;
+      
+      /* ДОДАЙТЕ ЦІ ДВА РЯДКИ ДЛЯ ПРЕМІУМ-БЛОКУ У СВІТЛІЙ ТЕМІ */
+      --sub-card-bg: linear-gradient(145deg, #ffffff 0%, #f3e8ff 100%);
+      --sub-card-border: #c084fc;
     }
 
     * {
@@ -163,8 +167,8 @@
 
     /* Картка Підписки */
     .card-subscription {
-      border: 2px solid var(--accent) !important;
-      background: linear-gradient(145deg, var(--card-bg) 0%, #2e1065 100%) !important;
+      border: 2px solid var(--sub-card-border, var(--accent)) !important;
+      background: var(--sub-card-bg, linear-gradient(145deg, var(--card-bg) 0%, #2e1065)) !important;
     }
 
     .card-subscription:hover {
@@ -682,27 +686,20 @@
   ];
 
   function drawDailyCard() {
-    const today = new Date().toISOString().slice(0, 10);
-    const savedDate = localStorage.getItem('tarot_daily_date');
-    const savedCardIndex = localStorage.getItem('tarot_daily_card_index');
-
-    let cardIndex;
-
-    if (savedDate === today && savedCardIndex !== null) {
-      cardIndex = parseInt(savedCardIndex, 10);
-    } else {
-      cardIndex = Math.floor(Math.random() * tarot78Cards.length);
-      localStorage.setItem('tarot_daily_date', today);
-      localStorage.setItem('tarot_daily_card_index', cardIndex);
-    }
-
+    // Рандомний індекс з усіх 78 карт без прив'язки до дати
+    const cardIndex = Math.floor(Math.random() * tarot78Cards.length);
     const card = tarot78Cards[cardIndex];
+    
     const box = document.getElementById('dailyCardContent');
     box.className = 'daily-card-result';
     box.innerHTML = `
-      <div style="font-size: 0.85rem; color: #38bdf8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">Твоя карта на сьогодні (${today}):</div>
+      <div style="font-size: 0.85rem; color: #38bdf8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">Твоя карта дня:</div>
       <h3 style="color: var(--text); font-size: 1.4rem; margin-bottom: 12px;">${card.title}</h3>
       <p style="font-size: 1rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5;">${card.desc}</p>
+      
+      <!-- Кнопка «Спробувати знову» -->
+      <button class="btn btn-secondary" onclick="drawDailyCard()" style="margin-bottom: 15px; font-size: 0.9rem; padding: 8px 18px;">🔄 Спробувати іншу карту</button>
+      
       <div style="border-top: 1px solid #334155; padding-top: 15px; font-size: 0.85rem; color: var(--text-muted);">
         Хочеш дізнатися більше про свою ситуацію? <br>
         <a href="https://t.me/TAROTBYV_bot" target="_blank" style="color: var(--accent); text-decoration: underline; font-weight: 600;">Замов особистий розклад у Telegram</a>
@@ -717,12 +714,6 @@
     if (savedTheme === 'light') {
       document.body.setAttribute('data-theme', 'light');
       if (btn) btn.innerHTML = '☀️ Світла';
-    }
-
-    const today = new Date().toISOString().slice(0, 10);
-    const savedDate = localStorage.getItem('tarot_daily_date');
-    if (savedDate === today) {
-      drawDailyCard();
     }
   });
 </script>
