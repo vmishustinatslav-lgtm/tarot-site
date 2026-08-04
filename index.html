@@ -14,6 +14,16 @@
       --text-muted: #94a3b8;
     }
 
+    /* Стилі для світлої теми */
+    [data-theme="light"] {
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --accent: #7c3aed;
+      --accent-hover: #6d28d9;
+      --text: #0f172a;
+      --text-muted: #475569;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -26,6 +36,7 @@
       color: var(--text);
       line-height: 1.5;
       padding-bottom: 80px;
+      transition: background-color 0.3s, color 0.3s;
     }
 
     .container {
@@ -87,7 +98,7 @@
     .hero h1 {
       font-size: 2.2rem;
       margin-bottom: 12px;
-      color: #f1f5f9;
+      color: var(--text);
     }
 
     .hero p {
@@ -95,33 +106,6 @@
       color: var(--text-muted);
       max-width: 580px;
       margin: 0 auto 25px;
-    }
-
-    /* Про мене */
-    .about-content {
-      background: var(--card-bg);
-      padding: 25px;
-      border-radius: 16px;
-      margin-top: 15px;
-    }
-
-    .about-list {
-      list-style: none;
-      margin: 15px 0;
-    }
-
-    .about-list li {
-      margin-bottom: 8px;
-      padding-left: 20px;
-      position: relative;
-      font-size: 0.95rem;
-    }
-
-    .about-list li::before {
-      content: "✦";
-      position: absolute;
-      left: 0;
-      color: var(--accent);
     }
 
     /* Сітка послуг */
@@ -180,7 +164,7 @@
     /* Картка Підписки */
     .card-subscription {
       border: 2px solid var(--accent) !important;
-      background: linear-gradient(145deg, #1e293b 0%, #2e1065 100%) !important;
+      background: linear-gradient(145deg, var(--card-bg) 0%, #2e1065 100%) !important;
     }
 
     .card-subscription:hover {
@@ -204,7 +188,7 @@
 
     /* Інтерактивна Карта Дня */
     .daily-card-box {
-      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      background: var(--card-bg);
       border: 1px dashed var(--accent);
       border-radius: 16px;
       padding: 30px 20px;
@@ -221,25 +205,6 @@
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* FAQ */
-    .faq-item {
-      background: var(--card-bg);
-      padding: 18px;
-      border-radius: 12px;
-      margin-top: 12px;
-    }
-
-    .faq-item h4 {
-      margin-bottom: 6px;
-      color: #e2e8f0;
-      font-size: 1rem;
-    }
-
-    .faq-item p {
-      color: var(--text-muted);
-      font-size: 0.9rem;
     }
 
     /* Плаваюча кнопка */
@@ -299,7 +264,7 @@
     .modal-title {
       font-size: 1.35rem;
       margin-bottom: 8px;
-      color: #f1f5f9;
+      color: var(--text);
       padding-right: 20px;
     }
 
@@ -349,364 +314,418 @@
 </head>
 <body>
 
-  <div class="container">
-    <!-- HERO -->
-    <section class="hero">
-      <h1>Обрати розклад</h1>
-    </section>
+<div class="container">
+  <!-- Шапка сайту -->
+  <header style="display: flex; justify-content: space-between; align-items: center; padding: 20px 0 10px; gap: 10px; flex-wrap: wrap;">
+    <div style="font-size: 1.2rem; font-weight: 700; color: var(--accent);">🔮 TAROT BY V</div>
+    
+    <div style="display: flex; gap: 8px; align-items: center;">
+      <button class="btn btn-secondary" onclick="openAboutModal()" style="padding: 6px 14px; font-size: 0.85rem; cursor: pointer;">
+        ℹ️ Про мене
+      </button>
+      <button id="themeToggleBtn" class="btn btn-secondary" onclick="toggleTheme()" style="padding: 6px 14px; font-size: 0.85rem; cursor: pointer;">
+        🌙 Темна
+      </button>
+    </div>
+  </header>
 
-    <!-- ПОСЛУГИ (Оригінальний вигляд і підписка) -->
-    <section style="border-bottom: none; padding-top: 0;">
-      <div class="services-grid">
-        
-        <!-- Розклад 1 -->
-        <div class="card" onclick="openModal('modal-1')">
-          <div>
-            <h3>Три карти</h3>
-            <p>Швидка відповідь на одне чітке питання або оперативна оцінка ситуації в будь якій сфері.</p>
-          </div>
-          <div>
-            <div class="price">199,99 грн <old>250 грн</old></div>
-            <button class="btn btn-block btn-secondary">Детальніше</button>
-          </div>
-        </div>
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Обрати розклад</h1>
+  </section>
 
-        <!-- Розклад 2 -->
-        <div class="card" onclick="openModal('modal-2')">
-          <div>
-            <h3>Сигніфікація</h3>
-            <p>Глибокий аналіз особистості, внутрішнього стану або стосунків з партнером.</p>
-          </div>
-          <div>
-            <div class="price">299,99 грн <old>350 грн</old></div>
-            <button class="btn btn-block btn-secondary">Детальніше</button>
-          </div>
-        </div>
-
-        <!-- Розклад 3 -->
-        <div class="card" onclick="openModal('modal-3')">
-          <div>
-            <h3>Огляд ситуації</h3>
-            <p>Повний розбір запиту: причини, приховані мотиви, підказки карт та ймовірний результат.</p>
-          </div>
-          <div>
-            <div class="price">399,99 грн <old>450 грн</old></div>
-            <button class="btn btn-block btn-secondary">Детальніше</button>
-          </div>
-        </div>
-
-        <!-- Розклад 4 -->
-        <div class="card" onclick="openModal('modal-4')">
-          <div>
-            <h3>Консультація (1 год)</h3>
-            <p>Індивідуальна робота в режимі реального часу. Будь-яка кількість питань протягом години.</p>
-          </div>
-          <div>
-            <div class="price">499,99 грн <old>550 грн</old></div>
-            <button class="btn btn-block btn-secondary">Детальніше</button>
-          </div>
-        </div>
-
-        <!-- Розклад 5 -->
-        <div class="card" onclick="openModal('modal-5')">
-          <div>
-            <h3>Своє питання</h3>
-            <p>Не знайшли потрібний розклад? Сформулюємо індивідуальні питання під ваш запит.</p>
-          </div>
-          <div>
-            <div class="price">від 150 грн</div>
-            <button class="btn btn-block btn-secondary">Детальніше</button>
-          </div>
-        </div>
-
-        <!-- Розклад 6: ПІДПИСКА -->
-        <div class="card card-subscription" onclick="openModal('modal-sub')">
-          <div class="badge">🔥 PREM</div>
-          <div>
-            <h3>Таро-Супровід</h3>
-            <p>Преміум підписка на 30 днів. Великий розклад на місяць + експрес-підтримка.</p>
-          </div>
-          <div>
-            <div class="price">899,99 грн <old>1100 грн</old></div>
-            <button class="btn btn-block">Детальніше</button>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- СЕКЦІЯ: КАРТА ДНЯ (78 КАРТ) -->
-    <section>
-      <h2 style="text-align: center;">🃏 Отримати Карту Дня</h2>
-      <p style="color: var(--text-muted); text-align: center; margin-bottom: 15px;">Безкоштовне передбачення з колоди Таро на сьогодні</p>
+  <!-- ПОСЛУГИ -->
+  <section style="border-bottom: none; padding-top: 0;">
+    <div class="services-grid">
       
-      <div class="daily-card-box" id="dailyCardBox">
-        <div id="dailyCardContent">
-          <div style="font-size: 3rem; margin-bottom: 10px;">🔮</div>
-          <h3>Яка карта випаде тобі сьогодні? Загадай питання та отримай відповідь</h3>
-          <p style="margin: 10px 0 20px; color: var(--text-muted);">Натисни кнопку нижче, щоб отримати пораду карт на день.</p>
-          <button class="btn" onclick="drawDailyCard()">Витягнути карту дня</button>
+      <!-- Розклад 1 -->
+      <div class="card" onclick="openModal('modal-1')">
+        <div>
+          <h3>Три карти</h3>
+          <p>Швидка відповідь на одне чітке питання або оперативна оцінка ситуації в будь якій сфері.</p>
+        </div>
+        <div>
+          <div class="price">199,99 грн <old>250 грн</old></div>
+          <button class="btn btn-block btn-secondary">Детальніше</button>
         </div>
       </div>
-    </section>
-  </div>
 
-  <!-- ПЛАВАЮЧА КНОПКА (ОРИГІНАЛЬНА) -->
-  <div class="sticky-btn-wrapper">
-    <a href="https://t.me/TAROTBYV_bot" target="_blank" class="btn">💬 Записатися в Telegram</a>
-  </div>
-
-  <!-- МОДАЛЬНІ ВІКНА -->
-
-  <div class="modal-overlay" id="modal-1" onclick="closeModalOnOuter(event, 'modal-1')">
-    <div class="modal-card">
-      <button class="modal-close" onclick="closeModal('modal-1')">&times;</button>
-      <div class="modal-title">Розклад «Три карти»</div>
-      <div class="modal-price">199,99 грн <old style="text-decoration: line-through; color: #64748b; font-size: 0.85rem;">250 грн</old></div>
-      <div class="modal-body">
-        <p>Швидка відповідь на одне чітке питання або швидка оцінка ситуації в будь якій сфері.</p>
-        <ul>
-          <li>Причина або витоки ситуації.</li>
-          <li>Теперішній стан та приховані фактори.</li>
-          <li>Порада карт і найімовірніший розвиток.</li>
-        </ul>
-      </div>
-      <a href="https://t.me/TAROTBYV_bot" target="_blank" class="btn btn-block">Записатися в Telegram</a>
-    </div>
-  </div>
-
-  <div class="modal-overlay" id="modal-2" onclick="closeModalOnOuter(event, 'modal-2')">
-    <div class="modal-card">
-      <button class="modal-close" onclick="closeModal('modal-2')">&times;</button>
-      <div class="modal-title">Розклад «Сигніфікація»</div>
-      <div class="modal-price">299,99 грн <old style="text-decoration: line-through; color: #64748b; font-size: 0.85rem;">350 грн</old></div>
-      <div class="modal-body">
-        <p>Глибокий аналіз вашої особистості, внутрішнього стану або стосунків з партнером.</p>
-        <ul>
-          <li>Справжні почуття, думки та мотиви.</li>
-          <li>Наміри та ставлення іншої людини.</li>
-          <li>Внутрішні блоки та точки росту.</li>
-        </ul>
-      </div>
-      <a href="https://t.me/TAROTBYV_bot" target="_blank" class="btn btn-block">Записатися в Telegram</a>
-    </div>
-  </div>
-
-  <div class="modal-overlay" id="modal-3" onclick="closeModalOnOuter(event, 'modal-3')">
-    <div class="modal-card">
-      <button class="modal-close" onclick="closeModal('modal-3')">&times;</button>
-      <div class="modal-title">Розклад «Огляд ситуації»</div>
-      <div class="modal-price">399,99 грн <old style="text-decoration: line-through; color: #64748b; font-size: 0.85rem;">450 грн</old></div>
-      <div class="modal-body">
-        <p>Повний розбір запиту: причини, приховані мотиви, підказки карт та ймовірний результат.</p>
-        <ul>
-          <li>Повна хронологія та витоки проблеми.</li>
-          <li>Перспективи розвитку за кількома сценаріями.</li>
-          <li>Чіткі рекомендації карт.</li>
-        </ul>
-      </div>
-      <a href="https://t.me/TAROTBYV_bot" target="_blank" class="btn btn-block">Записатися в Telegram</a>
-    </div>
-  </div>
-
-  <div class="modal-overlay" id="modal-4" onclick="closeModalOnOuter(event, 'modal-4')">
-    <div class="modal-card">
-      <button class="modal-close" onclick="closeModal('modal-4')">&times;</button>
-      <div class="modal-title">Консультація (1 год)</div>
-      <div class="modal-price">499,99 грн <old style="text-decoration: line-through; color: #64748b; font-size: 0.85rem;">550 грн</old></div>
-      <div class="modal-body">
-        <p>Індивідуальна робота в режимі реального часу. Будь-яка кількість питань протягом години.</p>
-        <ul>
-          <li>Необмежена кількість питань протягом 60 хв.</li>
-          <li>Глибоке опрацювання деталей у ході розкладу.</li>
-          <li>Максимальна підтримка.</li>
-        </ul>
-      </div>
-      <a href="https://t.me/TAROTBYV_bot" target="_blank" class="btn btn-block">Записатися в Telegram</a>
-    </div>
-  </div>
-
-  <div class="modal-overlay" id="modal-5" onclick="closeModalOnOuter(event, 'modal-5')">
-    <div class="modal-card">
-      <button class="modal-close" onclick="closeModal('modal-5')">&times;</button>
-      <div class="modal-title">Своє питання</div>
-      <div class="modal-price">від 150 грн</div>
-      <div class="modal-body">
-        <p>Якщо у вас специфічний або короткий запит, що не підпадає під стандартні шаблони.</p>
-        <ul>
-          <li>Напишіть у бот вашу ситуацію.</li>
-          <li>Ми разом сформулюємо точні питання.</li>
-          <li>Підберемо оптимальну вартість під ваш обсяг.</li>
-        </ul>
-      </div>
-      <a href="https://t.me/TAROTBYV_bot" target="_blank" class="btn btn-block">Написати в Telegram</a>
-    </div>
-  </div>
-
-  <div class="modal-overlay" id="modal-sub" onclick="closeModalOnOuter(event, 'modal-sub')">
-    <div class="modal-card">
-      <button class="modal-close" onclick="closeModal('modal-sub')">&times;</button>
-      <div class="modal-title">🔮 Таро-Супровід (30 днів)</div>
-      <div class="modal-price">899,99 грн / місяць <old style="text-decoration: line-through; color: #64748b; font-size: 0.85rem;">1100 грн</old></div>
-      <div class="modal-body">
-        <p>Преміум підписка для тих, хто прагне мати постійну підтримку карт поруч протягом місяця.</p>
-        <ul>
-          <li>✨ <strong>Великий розклад на місяць:</strong> фокус уваги, робота, стосунки.</li>
-          <li>🗓 <strong>Щотижневий орієнтир:</strong> підказки карт на кожен новий тиждень.</li>
-          <li>⚡ <strong>3 експрес-розклади (3 карти):</strong> можливість терміново розібрати питання без черги.</li>
-          <li>👑 <strong>Пріоритет:</strong> ваші запити опрацьовуються першочергово.</li>
-        </ul>
-      </div>
-      <a href="https://t.me/TAROTBYV_bot" target="_blank" class="btn btn-block">Оформити підписку в Telegram</a>
-    </div>
-  </div>
-
-  <!-- СКРИПТИ -->
-  <script>
-    function openModal(id) {
-      document.getElementById(id).classList.add('active');
-    }
-
-    function closeModal(id) {
-      document.getElementById(id).classList.remove('active');
-    }
-
-    function closeModalOnOuter(event, id) {
-      if (event.target === document.getElementById(id)) {
-        closeModal(id);
-      }
-    }
-
-    // МАСИВ З УСІХ 78 КАРТ ТАРО (ВИКЛЮЧНО УКРАЇНСЬКА МОВА)
-    const tarot78Cards = [
-      // 22 СТАРШИХ АРКАНИ
-      { title: "🌟 0. Дурень (Шут)", desc: "День нових починань і спонтанності. Не бійся зробити перший крок у невідоме!" },
-      { title: "🪄 I. Маг", desc: "У тебе є всі ресурси та інструменти для досягнення мети. Дій рішуче!" },
-      { title: "🌙 II. Верховна Жриця", desc: "Довіряй своїй інтуїції та прихованим знакам. Поспіх сьогодні зайвий." },
-      { title: "👑 III. Імператриця", desc: "День достатку, комфорту та гармонії. Приділи час собі та близьким." },
-      { title: "🏛️ IV. Імператор", desc: "Час дисципліни, структури та контролю. Бери відповідальність у свої руки." },
-      { title: "🗝️ V. Ієрофант", desc: "Спирайся на традиції, моральні принципи та поради мудрих наставників." },
-      { title: "💖 VI. Закохані", desc: "День важливого вибору та гармонії в стосунках. Слухай серце." },
-      { title: "🛞 VII. Колісниця", desc: "Рух уперед, прорив і перемога! Не зупиняйся на шляху до мети." },
-      { title: "🦁 VIII. Сила", desc: "М'яка сила, терпіння та самоконтроль переможуть будь-які перешкоди." },
-      { title: "🕯️ IX. Відлюдник", desc: "Час для паузи, саморефлексії та пошуку внутрішньої правди." },
-      { title: "🎡 X. Колесо Фортуни", desc: "Доленосний поворот подій. Будь відкритим до раптових можливостей!" },
-      { title: "⚖️ XI. Справедливість", desc: "День чесності, зважених рішень і балансу. Причина й наслідок у дії." },
-      { title: "🪢 XII. Повішений", desc: "Подивись на ситуацію під іншим кутом. Іноді пауза є найкращим кроком." },
-      { title: "🦋 XIII. Смерть", desc: "Завершення старого етапу та трансформація. Звільни місце для нового." },
-      { title: "🕊️ XIV. Помірність", desc: "Баланс, гармонія та золота середина. Уникай крайнощів." },
-      { title: "😈 XV. Диявол", desc: "Будь уважним до спокус, залежностей та ілюзій. Тримай фокус." },
-      { title: "⚡ XVI. Вежа", desc: "Раптові зміни руйнують старі рамки. Це звільнення для кращого майбутнього." },
-      { title: "⭐ XVII. Зірка", desc: "Натхнення, надія та віра в успіх. Твої мрії мають реальне підґрунтя." },
-      { title: "🌕 XVIII. Місяць", desc: "День невизначеності та ілюзій. Довіряй інтуїції, але перевіряй факти." },
-      { title: "☀️ XIX. Сонце", desc: "Яскравий день! Радість, успіх, ясність та позитивна енергія." },
-      { title: "📯 XX. Страшний Суд", desc: "Переоцінка цінностей, важливі висновки та нове дихання." },
-      { title: "🌍 XXI. Світ", desc: "Завершення важливого циклу, гармонія та відчуття цілісності." },
-
-      // ЖЕЗЛИ
-      { title: "🔥 Туз Жезлів", desc: "Приплив натхнення, нової енергії та пристрасті до дій!" },
-      { title: "🔭 Двійка Жезлів", desc: "Планування майбутнього та розширення горизонтів." },
-      { title: "⛵ Трійка Жезлів", desc: "Перші результати праці та впевнений рух далі." },
-      { title: "🏰 Четвірка Жезлів", desc: "Стабільність, свято, затишок та радісні новини." },
-      { title: "🤼 П'ятірка Жезлів", desc: "Здоровий конкурентний рух, відстоювання своєї позиції." },
-      { title: "🏆 Шістка Жезлів", desc: "Публічний успіх, визнання ваших заслуг і перемога." },
-      { title: "🛡️ Сімка Жезлів", desc: "Захист власних кордонів. Перевага на вашому боці." },
-      { title: "🏹 Вісімка Жезлів", desc: "Швидкий перебіг подій, термінові звістки та поїздки." },
-      { title: "🏰 Дев'ятка Жезлів", desc: "Обережність та досвід. Ви майже біля мети, витримайте останній ривок." },
-      { title: "🎒 Десятка Жезлів", desc: "Перевантаження обов'язками. Час делегувати зайве." },
-      { title: "📜 Паж Жезлів", desc: "Цікава пропозиція, свіжі новини або новий спалах інтересу." },
-      { title: "🐎 Лицар Жезлів", desc: "Азарт, активність, сміливі дії та поїздки." },
-      { title: "👑 Королева Жезлів", desc: "Упевненість у собі, харизма та висока продуктивність." },
-      { title: "👑 Король Жезлів", desc: "Лідерство, авторитет і впевнені стратегічні рішення." },
-
-      // КУБКИ
-      { title: "🍷 Туз Кубків", desc: "Океан емоцій, щире кохання, натхнення та душевна гармонія." },
-      { title: "🤝 Двійка Кубків", desc: "Взаєморозуміння, вдала співпраця чи романтична зустріч." },
-      { title: "🎉 Трійка Кубків", desc: "Свято в колі друзів, радість спілкування та підтримка." },
-      { title: "🍷 Четвірка Кубків", desc: "Апатія чи нудьга. Подивіться довкола — ви не помічаєте свій шанс." },
-      { title: "🥀 П'ятірка Кубків", desc: "Смуток за минулим. Зосередьтеся на тому, що залишилося попереду." },
-      { title: "🎁 Шістка Кубків", desc: "Теплі спогади, зустріч із давніми знайомими або щирий подарунок." },
-      { title: "🌈 Сімка Кубків", desc: "Великий вибір та ілюзії. Обирайте розумом, а не лише мріями." },
-      { title: "🧳 Вісімка Кубків", desc: "Час відпустити те, що більше не приносить радості, і рухатися далі." },
-      { title: "🐟 Дев'ятка Кубків", desc: "Здійснення бажань, задоволення та емоційний комфорт." },
-      { title: "🏡 Десятка Кубків", desc: "Гармонія в родині, щастя, любов та взаємний затишок." },
-      { title: "✉️ Паж Кубків", desc: "Приємний знак уваги, комплімент або щира пропозиція." },
-      { title: "🐎 Лицар Кубків", desc: "Романтика, щирі почуття, гарні новини або запрошення." },
-      { title: "👑 Королева Кубків", desc: "Ніжність, турбота, глибока емпатія та підтримка." },
-      { title: "👑 Король Кубків", desc: "Емоційна зрілість, мудрість та спокій у прийнятті рішень." },
-
-      // МЕЧІ
-      { title: "🗡️ Туз Мечів", desc: "Ясність думки, чесна розмова та важливе інтелектуальне рішення." },
-      { title: "🙈 Двійка Мечів", desc: "Сумніви та небажання бачити очевидне. Час зробити вибір." },
-      { title: "💔 Трійка Мечів", desc: "Прикра новина чи розчарування. Очищення через чесну правду." },
-      { title: "🛌 Четвірка Мечів", desc: "Потреба у відпочинку, паузі та відновленні сил." },
-      { title: "🌪️ П'ятірка Мечів", desc: "Конфлікт, у якому краще зберегти свої нерви, а не правоту." },
-      { title: "⛵ Шістка Мечів", desc: "Перехід до більш спокійних берегів. Залишення проблем позаду." },
-      { title: "🦊 Сімка Мечів", desc: "Гнучкість, хитрість, стратегічне мислення та обережність." },
-      { title: "🙈 Вісімка Мечів", desc: "Внутрішні обмеження та страхи. Вихід є — треба наважитися." },
-      { title: "🌧️ Дев'ятка Мечів", desc: "Тривожні думки. Пам'ятайте: більшість переживань не справдяться." },
-      { title: "🌅 Десятка Мечів", desc: "Завершення важкого періоду. Найважче вже позаду!" },
-      { title: "📝 Паж Мечів", desc: "Збір інформації, допитливість, свіжі дані чи спостережливість." },
-      { title: "🐎 Лицар Мечів", desc: "Стрімкість, рішучість, чітка аргументація та натиск." },
-      { title: "👑 Королева Мечів", desc: "Незалежність, гострий розум, об'єктивність та чіткі кордони." },
-      { title: "👑 Король Мечів", desc: "Логіка, авторитет, юридична чи інтелектуальна точність." },
-
-      // ПЕНТАКЛІ
-      { title: "🪙 Туз Пентаклів", desc: "Чудовий фінансовий шанс, практичний подарунок чи ресурсна можливість!" },
-      { title: "🤹 Двійка Пентаклів", desc: "Балансування між кількома справами. Гнучкість — ваш ключ." },
-      { title: "⚒️ Трійка Пентаклів", desc: "Майстерність, професіоналізм та плідна командна робота." },
-      { title: "🔐 Четвірка Пентаклів", desc: "Збереження ресурсів, фінансова обережність і стабільність." },
-      { title: "🌧️ П'ятірка Пентаклів", desc: "Тимчасовий брак ресурсів. Не соромтеся попросити про підтримку." },
-      { title: "⚖️ Шістка Пентаклів", desc: "Щедрість, взаємодопомога, баланс 'брати-віддавати'." },
-      { title: "🌱 Сімка Пентаклів", desc: "Терпіння. Ваші інвестиції праці дадуть плоди згодом." },
-      { title: "🔨 Вісімка Пентаклів", desc: "Наполеглива робота, відточування навичок і прибуткова праця." },
-      { title: "🍇 Дев'ятка Пентаклів", desc: "Фінансова незалежність, комфорт та особисті досягнення." },
-      { title: "🏰 Десятка Пентаклів", desc: "Достаток, родинний добробут, впевненість у майбутньому." },
-      { title: "📖 Паж Пентаклів", desc: "Шанс для навчання, вигідна новина або практичний старт." },
-      { title: "🐎 Лицар Пентаклів", desc: "Надійність, послідовність, повільний, але гарантований успіх." },
-      { title: "👑 Королева Пентаклів", desc: "Практичність, турбота про затишок, фінансовий порядок." },
-      { title: "👑 Король Пентаклів", desc: "Стабільність, фінансовий успіх, бізнес-хватка та надійність." }
-    ];
-
-    // АЛГОРИТМ "1 КАРТА НА ДЕНЬ" (Збереження в localStorage)
-    function drawDailyCard() {
-      const today = new Date().toISOString().slice(0, 10);
-      const savedDate = localStorage.getItem('tarot_daily_date');
-      const savedCardIndex = localStorage.getItem('tarot_daily_card_index');
-
-      let cardIndex;
-
-      if (savedDate === today && savedCardIndex !== null) {
-        cardIndex = parseInt(savedCardIndex, 10);
-      } else {
-        cardIndex = Math.floor(Math.random() * tarot78Cards.length);
-        localStorage.setItem('tarot_daily_date', today);
-        localStorage.setItem('tarot_daily_card_index', cardIndex);
-      }
-
-      const card = tarot78Cards[cardIndex];
-      const box = document.getElementById('dailyCardContent');
-      box.className = 'daily-card-result';
-      box.innerHTML = `
-        <div style="font-size: 0.85rem; color: #38bdf8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">Твоя карта на сьогодні (${today}):</div>
-        <h3 style="color: #f8fafc; font-size: 1.4rem; margin-bottom: 12px;">${card.title}</h3>
-        <p style="font-size: 1rem; color: #cbd5e1; margin-bottom: 20px; line-height: 1.5;">${card.desc}</p>
-        <div style="border-top: 1px solid #334155; padding-top: 15px; font-size: 0.85rem; color: var(--text-muted);">
-          Хочеш дізнатися більше про свою ситуацію? <br>
-          <a href="https://t.me/TAROTBYV_bot" target="_blank" style="color: var(--accent); text-decoration: underline; font-weight: 600;">Замов особистий розклад у Telegram</a>
+      <!-- Розклад 2 -->
+      <div class="card" onclick="openModal('modal-2')">
+        <div>
+          <h3>Сигніфікація</h3>
+          <p>Глибокий аналіз особистості, внутрішнього стану або стосунків з партнером.</p>
         </div>
-      `;
+        <div>
+          <div class="price">299,99 грн <old>350 грн</old></div>
+          <button class="btn btn-block btn-secondary">Детальніше</button>
+        </div>
+      </div>
+
+      <!-- Розклад 3 -->
+      <div class="card" onclick="openModal('modal-3')">
+        <div>
+          <h3>Огляд ситуації</h3>
+          <p>Повний розбір запиту: причини, приховані мотиви, підказки карт та ймовірний результат.</p>
+        </div>
+        <div>
+          <div class="price">399,99 грн <old>450 грн</old></div>
+          <button class="btn btn-block btn-secondary">Детальніше</button>
+        </div>
+      </div>
+
+      <!-- Розклад 4 -->
+      <div class="card" onclick="openModal('modal-4')">
+        <div>
+          <h3>Консультація (1 год)</h3>
+          <p>Індивідуальна робота в режимі реального часу. Будь-яка кількість питань протягом години.</p>
+        </div>
+        <div>
+          <div class="price">499,99 грн <old>550 грн</old></div>
+          <button class="btn btn-block btn-secondary">Детальніше</button>
+        </div>
+      </div>
+
+      <!-- Розклад 5 -->
+      <div class="card" onclick="openModal('modal-5')">
+        <div>
+          <h3>Своє питання</h3>
+          <p>Не знайшли потрібний розклад? Сформулюємо індивідуальні питання під ваш запит.</p>
+        </div>
+        <div>
+          <div class="price">від 150 грн</div>
+          <button class="btn btn-block btn-secondary">Детальніше</button>
+        </div>
+      </div>
+
+      <!-- Розклад 6: ПІДПИСКА -->
+      <div class="card card-subscription" onclick="openModal('modal-sub')">
+        <div class="badge">🔥 PREM</div>
+        <div>
+          <h3>Таро-Супровід</h3>
+          <p>Преміум підписка на 30 днів. Великий розклад на місяць + експрес-підтримка.</p>
+        </div>
+        <div>
+          <div class="price">899,99 грн <old>1100 грн</old></div>
+          <button class="btn btn-block">Детальніше</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- СЕКЦІЯ: КАРТА ДНЯ (78 КАРТ) -->
+  <section>
+    <h2 style="text-align: center;">🃏 Отримати Карту Дня</h2>
+    <p style="color: var(--text-muted); text-align: center; margin-bottom: 15px;">Безкоштовне передбачення з колоди Таро на сьогодні</p>
+    
+    <div class="daily-card-box" id="dailyCardBox">
+      <div id="dailyCardContent">
+        <div style="font-size: 3rem; margin-bottom: 10px;">🔮</div>
+        <h3>Яка карта випаде тобі сьогодні? Загадай питання та отримай відповідь</h3>
+        <p style="margin: 10px 0 20px; color: var(--text-muted);">Натисни кнопку нижче, щоб отримати пораду карт на день.</p>
+        <button class="btn" onclick="drawDailyCard()">Витягнути карту дня</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ПЛАВАЮЧА КНОПКА -->
+<div class="sticky-btn-wrapper">
+  <a href="https://t.me/TAROTBYV_bot" target="_blank" class="btn">💬 Записатися в Telegram</a>
+</div>
+
+<!-- МОДАЛЬНІ ВІКНА ПОСЛУГ -->
+<div class="modal-overlay" id="modal-1" onclick="closeModalOnOuter(event, 'modal-1')">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeModal('modal-1')">&times;</button>
+    <div class="modal-title">Розклад «Три карти»</div>
+    <div class="modal-price">199,99 грн <old style="text-decoration: line-through; color: #64748b; font-size: 0.85rem;">250 грн</old></div>
+    <div class="modal-body">
+      <p>Швидка відповідь на одне чітке питання або швидка оцінка ситуації в будь якій сфері.</p>
+      <ul>
+        <li>Причина або витоки ситуації.</li>
+        <li>Теперішній стан та приховані фактори.</li>
+        <li>Порада карт і найімовірніший розвиток.</li>
+      </ul>
+    </div>
+    <a href="https://t.me/TAROTBYV_bot" target="_blank" class="btn btn-block">Записатися в Telegram</a>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-2" onclick="closeModalOnOuter(event, 'modal-2')">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeModal('modal-2')">&times;</button>
+    <div class="modal-title">Розклад «Сигніфікація»</div>
+    <div class="modal-price">299,99 грн <old style="text-decoration: line-through; color: #64748b; font-size: 0.85rem;">350 грн</old></div>
+    <div class="modal-body">
+      <p>Глибокий аналіз вашої особистості, внутрішнього стану або стосунків з партнером.</p>
+      <ul>
+        <li>Справжні почуття, думки та мотиви.</li>
+        <li>Наміри та ставлення іншої людини.</li>
+        <li>Внутрішні блоки та точки росту.</li>
+      </ul>
+    </div>
+    <a href="https://t.me/TAROTBYV_bot" target="_blank" class="btn btn-block">Записатися в Telegram</a>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-3" onclick="closeModalOnOuter(event, 'modal-3')">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeModal('modal-3')">&times;</button>
+    <div class="modal-title">Розклад «Огляд ситуації»</div>
+    <div class="modal-price">399,99 грн <old style="text-decoration: line-through; color: #64748b; font-size: 0.85rem;">450 грн</old></div>
+    <div class="modal-body">
+      <p>Повний розбір запиту: причини, приховані мотиви, підказки карт та ймовірний результат.</p>
+      <ul>
+        <li>Повна хронологія та витоки проблеми.</li>
+        <li>Перспективи розвитку за кількома сценаріями.</li>
+        <li>Чіткі рекомендації карт.</li>
+      </ul>
+    </div>
+    <a href="https://t.me/TAROTBYV_bot" target="_blank" class="btn btn-block">Записатися в Telegram</a>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-4" onclick="closeModalOnOuter(event, 'modal-4')">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeModal('modal-4')">&times;</button>
+    <div class="modal-title">Консультація (1 год)</div>
+    <div class="modal-price">499,99 грн <old style="text-decoration: line-through; color: #64748b; font-size: 0.85rem;">550 грн</old></div>
+    <div class="modal-body">
+      <p>Індивідуальна робота в режимі реального часу. Будь-яка кількість питань протягом години.</p>
+      <ul>
+        <li>Необмежена кількість питань протягом 60 хв.</li>
+        <li>Глибоке опрацювання деталей у ході розкладу.</li>
+        <li>Максимальна підтримка.</li>
+      </ul>
+    </div>
+    <a href="https://t.me/TAROTBYV_bot" target="_blank" class="btn btn-block">Записатися в Telegram</a>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-5" onclick="closeModalOnOuter(event, 'modal-5')">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeModal('modal-5')">&times;</button>
+    <div class="modal-title">Своє питання</div>
+    <div class="modal-price">від 150 грн</div>
+    <div class="modal-body">
+      <p>Якщо у вас специфічний або короткий запит, що не підпадає під стандартні шаблони.</p>
+      <ul>
+        <li>Напишіть у бот вашу ситуацію.</li>
+        <li>Ми разом сформулюємо точні питання.</li>
+        <li>Підберемо оптимальну вартість під ваш обсяг.</li>
+      </ul>
+    </div>
+    <a href="https://t.me/TAROTBYV_bot" target="_blank" class="btn btn-block">Написати в Telegram</a>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-sub" onclick="closeModalOnOuter(event, 'modal-sub')">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeModal('modal-sub')">&times;</button>
+    <div class="modal-title">🔮 Таро-Супровід (30 днів)</div>
+    <div class="modal-price">899,99 грн / місяць <old style="text-decoration: line-through; color: #64748b; font-size: 0.85rem;">1100 грн</old></div>
+    <div class="modal-body">
+      <p>Преміум підписка для тих, хто прагне мати постійну підтримку карт поруч протягом місяця.</p>
+      <ul>
+        <li>✨ <strong>Великий розклад на місяць:</strong> фокус уваги, робота, стосунки.</li>
+        <li>🗓 <strong>Щотижневий орієнтир:</strong> підказки карт на кожен новий тиждень.</li>
+        <li>⚡ <strong>3 експрес-розклади (3 карти):</strong> можливість терміново розібрати питання без черги.</li>
+        <li>👑 <strong>Пріоритет:</strong> ваші запити опрацьовуються першочергово.</li>
+      </ul>
+    </div>
+    <a href="https://t.me/TAROTBYV_bot" target="_blank" class="btn btn-block">Оформити підписку в Telegram</a>
+  </div>
+</div>
+
+<!-- МОДАЛЬНЕ ВІКНО "ПРО МЕНЕ" -->
+<div id="aboutModal" class="modal-overlay" onclick="closeModalOnOuter(event, 'aboutModal')">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeAboutModal()">&times;</button>
+    <div class="modal-title" style="color: var(--accent);">Про мене</div>
+    <div class="modal-body">
+      <p style="margin-bottom: 12px; line-height: 1.5;">Займаюся езотерикою з дитинства, а Таро опанував понад три роки тому. Моя філософія базується на простоті, щирості та дружньому підході, де я сприймаю клієнта як близьку людину, якій потрібна підтримка.</p>
+      <p style="line-height: 1.5;">Я шукаю першопричину ситуації та пропоную гнучкі формати комунікації: текст, голосові повідомлення або дзвінки, що дозволяє знаходити влучні слова для кожного індивідуального запиту.</p>
+    </div>
+  </div>
+</div>
+
+<!-- СКРИПТИ -->
+<script>
+  function openModal(id) {
+    document.getElementById(id).classList.add('active');
+  }
+
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('active');
+  }
+
+  function closeModalOnOuter(event, id) {
+    if (event.target === document.getElementById(id)) {
+      closeModal(id);
+    }
+  }
+
+  function openAboutModal() {
+    document.getElementById('aboutModal').classList.add('active');
+  }
+
+  function closeAboutModal() {
+    document.getElementById('aboutModal').classList.remove('active');
+  }
+
+  function toggleTheme() {
+    const currentTheme = document.body.getAttribute('data-theme');
+    const btn = document.getElementById('themeToggleBtn');
+
+    if (currentTheme === 'light') {
+      document.body.removeAttribute('data-theme');
+      if (btn) btn.innerHTML = '🌙 Темна';
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.body.setAttribute('data-theme', 'light');
+      if (btn) btn.innerHTML = '☀️ Світла';
+      localStorage.setItem('theme', 'light');
+    }
+  }
+
+  // МАСИВ З УСІХ 78 КАРТ ТАРО
+  const tarot78Cards = [
+    // 22 СТАРШИХ АРКАНИ
+    { title: "🌟 0. Дурень (Шут)", desc: "День нових починань і спонтанності. Не бійся зробити перший крок у невідоме!" },
+    { title: "🪄 I. Маг", desc: "У тебе є всі ресурси та інструменти для досягнення мети. Дій рішуче!" },
+    { title: "🌙 II. Верховна Жриця", desc: "Довіряй своїй інтуїції та прихованим знакам. Поспіх сьогодні зайвий." },
+    { title: "👑 III. Імператриця", desc: "День достатку, комфорту та гармонії. Приділи час собі та близьким." },
+    { title: "🏛️ IV. Імператор", desc: "Час дисципліни, структури та контролю. Бери відповідальність у свої руки." },
+    { title: "🗝️ V. Ієрофант", desc: "Спирайся на традиції, моральні принципи та поради мудрих наставників." },
+    { title: "💖 VI. Закохані", desc: "День важливого вибору та гармонії в стосунках. Слухай серце." },
+    { title: "🛞 VII. Колісниця", desc: "Рух уперед, прорив і перемога! Не зупиняйся на шляху до мети." },
+    { title: "🦁 VIII. Сила", desc: "М'яка сила, терпіння та самоконтроль переможуть будь-які перешкоди." },
+    { title: "🕯️ IX. Відлюдник", desc: "Час для паузи, саморефлексії та пошуку внутрішньої правди." },
+    { title: "🎡 X. Колесо Фортуни", desc: "Доленосний поворот подій. Будь відкритим до раптових можливостей!" },
+    { title: "⚖️ XI. Справедливість", desc: "День чесності, зважених рішень і балансу. Причина й наслідок у дії." },
+    { title: "🪢 XII. Повішений", desc: "Подивись на ситуацію під іншим кутом. Іноді пауза є найкращим кроком." },
+    { title: "🦋 XIII. Смерть", desc: "Завершення старого етапу та трансформація. Звільни місце для нового." },
+    { title: "🕊️ XIV. Помірність", desc: "Баланс, гармонія та золота середина. Уникай крайнощів." },
+    { title: "😈 XV. Диявол", desc: "Будь уважним до спокус, залежностей та ілюзій. Тримай фокус." },
+    { title: "⚡ XVI. Вежа", desc: "Раптові зміни руйнують старі рамки. Це звільнення для кращого майбутнього." },
+    { title: "⭐ XVII. Зірка", desc: "Натхнення, надія та віра в успіх. Твої мрії мають реальне підґрунтя." },
+    { title: "🌕 XVIII. Місяць", desc: "День невизначеності та ілюзій. Довіряй інтуїції, але перевіряй факти." },
+    { title: "☀️ XIX. Сонце", desc: "Яскравий день! Радість, успіх, ясність та позитивна енергія." },
+    { title: "📯 XX. Страшний Суд", desc: "Переоцінка цінностей, важливі висновки та нове дихання." },
+    { title: "🌍 XXI. Світ", desc: "Завершення важливого циклу, гармонія та відчуття цілісності." },
+
+    // ЖЕЗЛИ
+    { title: "🔥 Туз Жезлів", desc: "Приплив натхнення, нової енергії та пристрасті до дій!" },
+    { title: "🔭 Двійка Жезлів", desc: "Планування майбутнього та розширення горизонтів." },
+    { title: "⛵ Трійка Жезлів", desc: "Перші результати праці та впевнений рух далі." },
+    { title: "🏰 Четвірка Жезлів", desc: "Стабільність, свято, затишок та радісні новини." },
+    { title: "🤼 П'ятірка Жезлів", desc: "Здоровий конкурентний рух, відстоювання своєї позиції." },
+    { title: "🏆 Шістка Жезлів", desc: "Публічний успіх, визнання ваших заслуг і перемога." },
+    { title: "🛡️ Сімка Жезлів", desc: "Захист власних кордонів. Перевага на вашому боці." },
+    { title: "🏹 Вісімка Жезлів", desc: "Швидкий перебіг подій, термінові звістки та поїздки." },
+    { title: "🏰 Дев'ятка Жезлів", desc: "Обережність та досвід. Ви майже біля мети, витримайте останній ривок." },
+    { title: "🎒 Десятка Жезлів", desc: "Перевантаження обов'язками. Час делегувати зайве." },
+    { title: "📜 Паж Жезлів", desc: "Цікава пропозиція, свіжі новини або новий спалах інтересу." },
+    { title: "🐎 Лицар Жезлів", desc: "Азарт, активність, сміливі дії та поїздки." },
+    { title: "👑 Королева Жезлів", desc: "Упевненість у собі, харизма та висока продуктивність." },
+    { title: "👑 Король Жезлів", desc: "Лідерство, авторитет і впевнені стратегічні рішення." },
+
+    // КУБКИ
+    { title: "🍷 Туз Кубків", desc: "Океан емоцій, щире кохання, натхнення та душевна гармонія." },
+    { title: "🤝 Двійка Кубків", desc: "Взаєморозуміння, вдала співпраця чи романтична зустріч." },
+    { title: "🎉 Трійка Кубків", desc: "Свято в колі друзів, радість спілкування та підтримка." },
+    { title: "🍷 Четвірка Кубків", desc: "Апатія чи нудьга. Подивіться довкола — ви не помічаєте свій шанс." },
+    { title: "🥀 П'ятірка Кубків", desc: "Смуток за минулим. Зосередьтеся на тому, що залишилося попереду." },
+    { title: "🎁 Шістка Кубків", desc: "Теплі спогади, зустріч із давніми знайомими або щирий подарунок." },
+    { title: "🌈 Сімка Кубків", desc: "Великий вибір та ілюзії. Обирайте розумом, а не лише мріями." },
+    { title: "🧳 Вісімка Кубків", desc: "Час відпустити те, що більше не приносить радості, і рухатися далі." },
+    { title: "🐟 Дев'ятка Кубків", desc: "Здійснення бажань, задоволення та емоційний комфорт." },
+    { title: "🏡 Десятка Кубків", desc: "Гармонія в родині, щастя, любов та взаємний затишок." },
+    { title: "✉️ Паж Кубків", desc: "Приємний знак уваги, комплімент або щира пропозиція." },
+    { title: "🐎 Лицар Кубків", desc: "Романтика, щирі почуття, гарні новини або запрошення." },
+    { title: "👑 Королева Кубків", desc: "Ніжність, турбота, глибока емпатія та підтримка." },
+    { title: "👑 Король Кубків", desc: "Емоційна зрілість, мудрість та спокій у прийнятті рішень." },
+
+    // МЕЧІ
+    { title: "🗡️ Туз Мечів", desc: "Ясність думки, чесна розмова та важливе інтелектуальне рішення." },
+    { title: "🙈 Двійка Мечів", desc: "Сумніви та небажання бачити очевидне. Час зробити вибір." },
+    { title: "💔 Трійка Мечів", desc: "Прикра новина чи розчарування. Очищення через чесну правду." },
+    { title: "🛌 Четвірка Мечів", desc: "Потреба у відпочинку, паузі та відновленні сил." },
+    { title: "🌪️ П'ятірка Мечів", desc: "Конфлікт, у якому краще зберегти свої нерви, а не правоту." },
+    { title: "⛵ Шістка Мечів", desc: "Перехід до більш спокійних берегів. Залишення проблем позаду." },
+    { title: "🦊 Сімка Мечів", desc: "Гнучкість, хитрість, стратегічне мислення та обережність." },
+    { title: "🙈 Вісімка Мечів", desc: "Внутрішні обмеження та страхи. Вихід є — треба наважитися." },
+    { title: "🌧️ Дев'ятка Мечів", desc: "Тривожні думки. Пам'ятайте: більшість переживань не справдяться." },
+    { title: "🌅 Десятка Мечів", desc: "Завершення важкого періоду. Найважче вже позаду!" },
+    { title: "📝 Паж Мечів", desc: "Збір інформації, допитливість, свіжі дані чи спостережливість." },
+    { title: "🐎 Лицар Мечів", desc: "Стрімкість, рішучість, чітка аргументація та натиск." },
+    { title: "👑 Королева Мечів", desc: "Незалежність, гострий розум, об'єктивність та чіткі кордони." },
+    { title: "👑 Король Мечів", desc: "Логіка, авторитет, юридична чи інтелектуальна точність." },
+
+    // ПЕНТАКЛІ
+    { title: "🪙 Туз Пентаклів", desc: "Чудовий фінансовий шанс, практичний подарунок чи ресурсна можливість!" },
+    { title: "🤹 Двійка Пентаклів", desc: "Балансування між кількома справами. Гнучкість — ваш ключ." },
+    { title: "⚒️ Трійка Пентаклів", desc: "Майстерність, професіоналізм та плідна командна робота." },
+    { title: "🔐 Четвірка Пентаклів", desc: "Збереження ресурсів, фінансова обережність і стабільність." },
+    { title: "🌧️ П'ятірка Пентаклів", desc: "Тимчасовий брак ресурсів. Не соромтеся попросити про підтримку." },
+    { title: "⚖️ Шістка Пентаклів", desc: "Щедристь, взаємодопомога, баланс 'брати-віддавати'." },
+    { title: "🌱 Сімка Пентаклів", desc: "Терпіння. Ваші інвестиції праці дадуть плоди згодом." },
+    { title: "🔨 Вісімка Пентаклів", desc: "Наполеглива робота, відточування навичок і прибуткова праця." },
+    { title: "🍇 Дев'ятка Пентаклів", desc: "Фінансова незалежність, комфорт та особисті досягнення." },
+    { title: "🏰 Десятка Пентаклів", desc: "Достаток, родинний добробут, впевненість у майбутньому." },
+    { title: "📖 Паж Пентаклів", desc: "Шанс для навчання, вигідна новина або практичний старт." },
+    { title: "🐎 Лицар Пентаклів", desc: "Надійність, послідовність, повільний, але гарантований успіх." },
+    { title: "👑 Королева Пентаклів", desc: "Практичність, турбота про затишок, фінансовий порядок." },
+    { title: "👑 Король Пентаклів", desc: "Стабільність, фінансовий успіх, бізнес-хватка та надійність." }
+  ];
+
+  function drawDailyCard() {
+    const today = new Date().toISOString().slice(0, 10);
+    const savedDate = localStorage.getItem('tarot_daily_date');
+    const savedCardIndex = localStorage.getItem('tarot_daily_card_index');
+
+    let cardIndex;
+
+    if (savedDate === today && savedCardIndex !== null) {
+      cardIndex = parseInt(savedCardIndex, 10);
+    } else {
+      cardIndex = Math.floor(Math.random() * tarot78Cards.length);
+      localStorage.setItem('tarot_daily_date', today);
+      localStorage.setItem('tarot_daily_card_index', cardIndex);
     }
 
-    // Перевірка при завантаженні
-    window.addEventListener('DOMContentLoaded', () => {
-      const today = new Date().toISOString().slice(0, 10);
-      const savedDate = localStorage.getItem('tarot_daily_date');
-      if (savedDate === today) {
-        drawDailyCard();
-      }
-    });
-  </script>
+    const card = tarot78Cards[cardIndex];
+    const box = document.getElementById('dailyCardContent');
+    box.className = 'daily-card-result';
+    box.innerHTML = `
+      <div style="font-size: 0.85rem; color: #38bdf8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">Твоя карта на сьогодні (${today}):</div>
+      <h3 style="color: var(--text); font-size: 1.4rem; margin-bottom: 12px;">${card.title}</h3>
+      <p style="font-size: 1rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5;">${card.desc}</p>
+      <div style="border-top: 1px solid #334155; padding-top: 15px; font-size: 0.85rem; color: var(--text-muted);">
+        Хочеш дізнатися більше про свою ситуацію? <br>
+        <a href="https://t.me/TAROTBYV_bot" target="_blank" style="color: var(--accent); text-decoration: underline; font-weight: 600;">Замов особистий розклад у Telegram</a>
+      </div>
+    `;
+  }
+
+  // Ініціалізація теми та карти дня
+  window.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme');
+    const btn = document.getElementById('themeToggleBtn');
+    if (savedTheme === 'light') {
+      document.body.setAttribute('data-theme', 'light');
+      if (btn) btn.innerHTML = '☀️ Світла';
+    }
+
+    const today = new Date().toISOString().slice(0, 10);
+    const savedDate = localStorage.getItem('tarot_daily_date');
+    if (savedDate === today) {
+      drawDailyCard();
+    }
+  });
+</script>
 
 </body>
 </html>
